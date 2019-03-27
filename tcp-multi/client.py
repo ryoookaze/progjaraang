@@ -10,11 +10,15 @@ client_path = "./clientfolder/"
 image_name = ["lambo1.jpg", "lambo2.jpg"]
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+def changefolder():
+    os.chdir(client_path)
+
 def Main():
     s = socket.socket()
     s.connect((TCP_IP, TCP_PORT))
     if not os.path.exists(client_path):
         os.mkdir(client_path)
+        changefolder()
         filename = raw_input("Filename? -> ")
         if filename != 'q':
             s.send(filename)
@@ -34,8 +38,12 @@ def Main():
                         f.write(data)
                         print "{0:.2f}".format((totalRecv/float(filesize))*100)+"% Done"
                     print "Download Complete!"
+                    f.close()
             else:
-                print "File Does Not Exist!"
+                changefolder()
+                filename2 = raw_input("Filename -> ")
+                file = open(filename2,'w')
+                print "File Does Not Exist!, File Created"
 
     s.close()
     
