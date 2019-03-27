@@ -5,7 +5,7 @@ import os
 from thread import *
 
 TCP_IP = "127.0.0.1"
-TCP_PORT = 5000
+TCP_PORT = 9000
 client_path = "D:\Ryan\Kuliah\Progjar\tcp-multi\clientfolder"
 image_name = ["lambo1.jpg", "lambo2.jpg"]
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -20,14 +20,15 @@ def Main():
     if filename != 'q':
             sock.send(filename)
             data = sock.recv(4096)
-            if data[:10] == 'ADA':
-                filesize = long(data[10:])
+            if data[:6] == 'EXIST':
+                filesize = long(data[6:])
                 pesan = raw_input("File sudah ada, " + str(filesize)+\
                 "Bytes, unggah? (Y/N)? -> ")
             
                 if pesan == 'Y':
                     sock.send('OK')
-                    f = open('new' + filename, 'wb')
+                    data = os.join.path(client_path, filename)
+                    f = open(data, 'wb')
                     data = sock.recv(4096)
                     jumlahTerima = len(data)
                     f.write(data)
