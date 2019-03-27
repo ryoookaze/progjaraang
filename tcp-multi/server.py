@@ -37,6 +37,8 @@ def RetrievingFile(name, sock):
                         sock.send(bytesToSend)
                         print "File name :", filename
                         print "File size", bytesToSend
+        else:
+            sock.send("ERROR")
         sock.close()
 
 if __name__ == "__main__":
