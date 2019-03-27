@@ -11,35 +11,35 @@ image_name = ["lambo1.jpg", "lambo2.jpg"]
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 def Main():
-    sock.connect((TCP_IP, TCP_PORT))
-    if os.path.exists(client_path):
-        os.mkdir(client_path)
-        os.chdir(client_path)
+    s = socket.socket()
+    s.connect((TCP_IP, TCP_PORT))
 
     filename = raw_input("Filename? -> ")
     if filename != 'q':
-            sock.send(filename)
-            data = sock.recv(4096)
-            if data[:6] == 'EXIST':
-                filesize = long(data[6:])
-                pesan = raw_input("File sudah ada, " + str(filesize)+\
-                "Bytes, unggah? (Y/N)? -> ")
-            
-                if pesan == 'Y':
-                    sock.send('OK')
-                    data = os.join.path(client_path, filename)
-                    f = open(data, 'wb')
-                    data = sock.recv(4096)
-                    jumlahTerima = len(data)
+        s.send(filename)
+        data = s.recv(1024)
+        if data[:6] == 'EXISTS':
+            filesize = long(data[6:])
+            message = raw_input("File exists, " + str(filesize) +"Bytes, download? (Y/N)? -> ")
+            if message == 'Y':
+                s.send("OK")
+                f = open('new_'+filename, 'wb')
+                data = s.recv(1024)
+                totalRecv = len(data)
+                f.write(data)
+                while totalRecv < filesize:
+                    data = s.recv(1024)
+                    totalRecv += len(data)
                     f.write(data)
-                    while jumlahTerima < filesize:
-                        data = sock.recv(4096)
-                        jumlahTerima += len(data)
-                        f.write(data)
-            
-            else:
-                    print"File tidak ada"
-    sock.close()
-if __name__ == "__main__":
+                    print "{0:.2f}".format((totalRecv/float(filesize))*100)+ "% Done"
+                print "Download Complete!"
+                f.close()
+        else:
+            print "File Does Not Exist!"
+
+    s.close()
+    
+
+if __name__ == '__main__':
     Main()
 
