@@ -5,9 +5,9 @@ import os
 from thread import *
 
 TCP_IP = "127.0.0.1"
-TCP_PORT = 9000
+TCP_PORT = 8501
 BUFFERSIZE = 4096
-server_path = "D:\Ryan\Kuliah\Progjar\tcp-multi\serverfolder"
+server_path = "./serverfolder/"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
@@ -37,6 +37,7 @@ def RetrievingFile(name, sock):
                         print "File name :", filename
                         print "File size", bytesToSend
         sock.close()
+
 if __name__ == "__main__":
     Main()
 
