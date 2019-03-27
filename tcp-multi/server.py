@@ -10,8 +10,8 @@ TCP_PORT = 9000
 server_path = "D:\Ryan\Kuliah\Progjar\tcp-multi\serverfolder"
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-def Clientcon():
-    sock.listen(5)
+
+def Main():
     print"Waiting for connection"
     sock.bind((TCP_IP, TCP_PORT))
     sock.listen(5)
@@ -26,6 +26,7 @@ def Clientcon():
 def RetrievingFile(name, sock):
     if not os.path.exists(server_path):
         os.mkdir(server_path)
+        os.chdir(server_path)
         filename = sock.recv(4096)
         if os.path.isfile(filename):
                 userResponse = sock.recv(4096)
@@ -37,8 +38,8 @@ def RetrievingFile(name, sock):
                         print "File size", bytesToSend
         sock.close()
 
-if __name__ == "__clientcon__":
-    Clientcon()
+if __name__ == "__main__":
+    Main()
 
 
 
