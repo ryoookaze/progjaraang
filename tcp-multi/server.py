@@ -8,6 +8,7 @@ TCP_IP = "127.0.0.1"
 TCP_PORT = 8502
 BUFFERSIZE = 4096
 server_path = "./serverfolder/"
+pict_image = ["lambo1.jpg", "lambo2.jpg"]
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 if os.path.exists(server_path):
