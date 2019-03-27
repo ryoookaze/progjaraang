@@ -5,11 +5,13 @@ import os
 from thread import *
 
 TCP_IP = "127.0.0.1"
-TCP_PORT = 8501
+TCP_PORT = 8502
 BUFFERSIZE = 4096
 server_path = "./serverfolder/"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+if os.path.exists(server_path):
+    os.mkdir(server_path)
 
 def Main():
     print"Waiting for connection"
@@ -26,13 +28,12 @@ def Main():
 def RetrievingFile(name, sock):
     if not os.path.exists(server_path):
         os.mkdir(server_path)
-        os.chdir(server_path)
-        filename = sock.recv(4096)
+        filename = sock.recv(BUFFERSIZE)
         if os.path.isfile(filename):
-                userResponse = sock.recv(4096)
+                userResponse = sock.recv(BUFFERSIZE)
                 if userResponse[:2] == 'OK':
                     with open(filename,'rb') as file:
-                        bytesToSend = file.read(4096)
+                        bytesToSend = file.read(BUFFERSIZE)
                         sock.send(bytesToSend)
                         print "File name :", filename
                         print "File size", bytesToSend
