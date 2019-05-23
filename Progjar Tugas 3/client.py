@@ -6,10 +6,10 @@ from os import listdir
 from os.path import isfile, join
 
 client_path = "./client/"
+server_path = "./"
 host = '127.0.0.1'
 port = 5000
 image_list = []
-mypath = "./"
 
 s = socket.socket()
 s.connect((host, port))
@@ -55,9 +55,12 @@ def Main():
         sys.exit()
 
 def uploadToServer():
+        onlyfiles = [f for f in listdir(client_path) if isfile(join(client_path, f))]
+        print(onlyfiles)
         filename = raw_input("Filename? -> ")
         if filename != 'q':
-            s.send(filename)
+            completePath = os.path.join(client_path, filename)
+            s.send(completePath)
             data = s.recv(1024)
             if data[:6] == 'EXISTS':
                 filesize = long(data[6:])

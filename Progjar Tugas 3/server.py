@@ -9,7 +9,7 @@ s.bind((host,port))
 s.listen(5)
 
 def RetrFile(name, sock):
-    filename = sock.recv(1024)
+    filename = sock.recv(1024) 
     if os.path.isfile(filename):
         sock.send("EXISTS " + str(os.path.getsize(filename)))
         userResponse = sock.recv(1024)
