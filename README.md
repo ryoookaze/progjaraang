@@ -5,7 +5,7 @@ Kemudian jalankan run_bash.py
 File akan tersimpan pada masing - masing folder client
 
 # Tugas 3
-(REQUEST FOLDER NYA MASIH BELUM BISA. 
+(REQUEST FOLDER NYA MASIH BELUM BISA).  
 Jalankan server.py. 
 Kemudian jalankan client.py. 
 Terdapat file 'contoh.jpg', ketikkan nama file tersebut. 
