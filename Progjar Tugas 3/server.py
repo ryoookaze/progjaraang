@@ -1,6 +1,12 @@
 import socket
 import threading
 import os
+host = '127.0.0.1'
+port = 5000
+s = socket.socket()
+s.bind((host,port))
+
+s.listen(5)
 
 def RetrFile(name, sock):
     filename = sock.recv(1024)
@@ -20,15 +26,6 @@ def RetrFile(name, sock):
     sock.close()
 
 def Main():
-    host = '127.0.0.1'
-    port = 5000
-
-
-    s = socket.socket()
-    s.bind((host,port))
-
-    s.listen(5)
-
     print "Server Started."
     while True:
         c, addr = s.accept()
