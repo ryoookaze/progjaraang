@@ -12,6 +12,6 @@ Terdapat file aha1.jpg dan aha2.jpg.
 Masukkan nama file yang ingin di akses.  
 Masukkan command UP untuk menguplopad file.  
 File akan terupload dengan nama : "new_+nama file".  
-Masukkan command DO untuk mendownload file.  
+Masukkan command DO untuk merequest file.  
 File akan masuk ke client dengan nama : "new_+nama file".  
   
