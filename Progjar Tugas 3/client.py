@@ -1,18 +1,27 @@
 import socket
 import os
 import sys
+import glob
+from os import listdir
+from os.path import isfile, join
 
 client_path = "./client/"
 host = '127.0.0.1'
 port = 5000
+image_list = []
+mypath = "./"
 
 s = socket.socket()
 s.connect((host, port))
 #completePath = os.path.join(client_path, f)
+print("DO for Download, UP for Upload, OUT for Exit")
 input_req = raw_input(">")
+
 
 def Main():
     if(input_req == 'DO'):
+        onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+        print(onlyfiles)
         filename = raw_input("Filename? -> ")
         if filename != 'q':
             s.send(filename)
